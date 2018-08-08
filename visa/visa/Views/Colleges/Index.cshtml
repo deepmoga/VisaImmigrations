@@ -1,0 +1,42 @@
+﻿@model IEnumerable<visa.Models.College>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="table1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Countrys.CountryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CollegeName)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Countrys.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollegeName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Collegeid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Collegeid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Collegeid })
+                </td>
+            </tr>
+        }
+
+</table>

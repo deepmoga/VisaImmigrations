@@ -1,0 +1,92 @@
+﻿@model IEnumerable<visa.Models.ProcessingForm>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="table1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.preforms.StudentName)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.AppliedDate)
+            </th>
+            
+           
+            <th>
+                @Html.DisplayNameFor(model => model.ProcessAlertDate)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.CollegeAlertDate)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.GICAlertDate)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.EmbassyAlertDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackingId)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.preforms.StudentName)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppliedDate)
+                </td>
+                
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcessAlertDate)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollegeAlertDate)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.GICAlertDate)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                   
+                </td>
+                
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrackingId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Formid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Formid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Formid })
+                </td>
+            </tr>
+        }
+
+</table>

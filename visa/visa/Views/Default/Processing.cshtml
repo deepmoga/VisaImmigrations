@@ -1,0 +1,62 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Processing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Processing Fees Alert</h2>
+
+
+<table class="table" id="table1">
+    <thead>
+        <tr>
+            <th>
+                Student Name
+            </th>
+            <th>
+                Father
+            </th>
+            <th>
+                Contact
+            </th>
+            <th>
+                Fee
+            </th>
+            <th>
+                AlertDate
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.JoinData)
+    {
+        <tr>
+
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Father
+            </td>
+            <td>
+                @item.Contact
+            </td>
+            <td>
+                @item.Fee
+            </td>
+            <td>
+                @item.AlertDate.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.ActionLink("AlertSMS", "SMS", new { id = item.Studentid,status=1 }) |
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<visa.Models.Docs>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="table1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.preforms.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DocName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documents)
+            </th>
+          
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.preforms.StudentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documents)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+</table>

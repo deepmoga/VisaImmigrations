@@ -1,0 +1,181 @@
+﻿@model IEnumerable<visa.Models.PreForm>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var a = "";
+    var fname = "";
+    var id = "";
+}
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="table1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotherName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotherName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNo)
+                    @*<input id="hfid" type="hidden" value="@item.id" />*@
+
+                </td>
+                <td>
+                    @if (item.Status == "Pending")
+                {
+                        <div class="label label-danger">@item.Status</div>
+                    }
+                    else
+                    {
+                        <div class="label label-primary">@item.Status</div>
+
+                    }
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Preformid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Preformid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Preformid }) |
+
+                    @Html.ActionLink("Change status", "ChangeStatus", new { id = item.Preformid }) |
+                    @Html.ActionLink("Profile", "profile", new { id = item.Preformid }, new { @title = "Click here to Manage student profile" }) |
+
+
+
+                </td>
+            </tr>
+        }
+</table>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Tool Gallery</h4>
+                    </div>
+
+                    <div class="modal-body clearfix">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Serial No</label>
+                                <input id="txtsid" class="form-control" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label>Student Name</label>
+                                <input id="txtname" class="form-control" type="text" readonly="True" />
+                            </div>
+                            <div class="form-group">
+                                <label>Father Name</label>
+                                <input id="txtfname" class="form-control" type="text" readonly="True" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+    function ShowPopUp(data) {
+        debugger;
+        var id = data;
+        var options = { "backdrop": "static", keyboard: true };
+        var url = '/Home/Pop';
+        $.ajax
+       ({
+           url: '/PreForms/Pop',
+           type: 'POST',
+           datatype: 'application/json',
+           contentType: 'application/json',
+           data: JSON.stringify({
+               stateId: +id
+           }),
+           success: function (result) {
+               debugger;
+
+
+               $('#myModal').modal(options);
+               $('#myModal').modal('show');
+               $.each($.parseJSON(result), function (i, city) {
+                   debugger;
+                   $("#txtsid").val(city.SerialNo)
+                   $("#txtname").val(city.StudentName)
+                   $("#txtfname").val(city.FatherName)
+
+
+               })
+
+
+           },
+           error: function () {
+               alert("Whooaaa! Something went wrong..")
+           },
+
+
+
+
+
+       });
+        $("#closbtn").click(function () {
+            $('#myModal').modal('show');
+        });
+    };
+
+</script>
